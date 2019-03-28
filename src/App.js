@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import Movies from './component/Conditional/movies';
 
-import './App.css';
 
 class App extends Component {
   render() {
     return (
+      <div>
     <main className="container">
-    <h1>Hello word</h1>
+    <Movies />
     </main>
+ 
+  
+    </div>
     );
   }
 }
