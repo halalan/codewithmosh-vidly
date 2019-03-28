@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Movies from './component/Conditional/movies';
+import Movies from './component/Deleting /movies';
 
 
 class App extends Component {
