@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Movies from './component/Deleting /movies';
+import Movie from './components';
 
 
 class App extends Component {
@@ -7,10 +7,10 @@ class App extends Component {
     return (
       <div>
     <main className="container">
-    <Movies />
+   
     </main>
  
-  
+    <Movie/>
     </div>
     );
   }
