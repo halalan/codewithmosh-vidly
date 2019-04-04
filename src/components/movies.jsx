@@ -41,11 +41,14 @@ handlePageChange = page  => {
 
    render() {
 const { length: count } = this.state.movies;
-const {pageSize, currentPage, movies: allMovies}= this.state;
+const {pageSize, currentPage,selectedGenre, movies: allMovies}= this.state;
 
 if (count === 0 )
  return <h1 className = "body1">Tidak ada film dalam database!!!!!!!!!!</h1>;
- const movies = paginate(allMovies,currentPage, pageSize)
+  const filtered = selectedGenre 
+  ? allMovies.filter(m => m.genre._id === selectedGenre._id ) 
+  : allMovies;
+ const movies = paginate(filtered,currentPage, pageSize)
      return( 
          <div className="row">
          <div className="col-3">
@@ -56,7 +59,7 @@ if (count === 0 )
   
          </div>
          <div className="col">
-         <h3 className="body"> semuanya ada di sini {count} film bollywood dalam database.</h3>
+         <h3 className="body"> semuanya ada di sini {filtered.length} film bollywood dalam database.</h3>
      <table className="table">
      <thead>
        <tr>
@@ -91,7 +94,7 @@ if (count === 0 )
          </table>
          <Pagination
          onPageChange={this.handlePageChange}
-         itemsCount={count}
+         itemsCount={filtered.length}
          pageSize={pageSize}
          currentPage={currentPage}
          />
