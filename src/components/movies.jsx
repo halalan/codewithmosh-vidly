@@ -15,10 +15,11 @@ import { getGenres } from "../services/fakeGenreService";
    };
 
    componentDidMount(){
-this.setState({movies: getMovies(), genres: getGenres()})
-   }
+     const genres = [{ name: 'All Genres'},...getGenres()]
 
-    
+
+      this.setState({ movies: getMovies(), genres});
+   }
    handleDelete = (movie) => {
   const movies = this.state.movies.filter(m => m._id !== movie._id);
   this.setState({ movies });
@@ -36,7 +37,7 @@ handlePageChange = page  => {
   this.setState({ currentPage : page});
 };
  handleGenreSelect = genre  => {
-   this.setState({ selectedGenre: genre});
+   this.setState({ selectedGenre: genre, currentPage: 1});
  };
 
    render() {
@@ -45,7 +46,8 @@ const {pageSize, currentPage,selectedGenre, movies: allMovies}= this.state;
 
 if (count === 0 )
  return <h1 className = "body1">Tidak ada film dalam database!!!!!!!!!!</h1>;
-  const filtered = selectedGenre 
+  const filtered = 
+  selectedGenre  && selectedGenre._id
   ? allMovies.filter(m => m.genre._id === selectedGenre._id ) 
   : allMovies;
  const movies = paginate(filtered,currentPage, pageSize)
@@ -98,9 +100,7 @@ if (count === 0 )
          pageSize={pageSize}
          currentPage={currentPage}
          />
-         
          </div>
-        
          </div>
     )    
 }  
