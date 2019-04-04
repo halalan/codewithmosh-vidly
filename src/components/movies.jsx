@@ -74,7 +74,7 @@ if (count === 0 )
          </table>
          <Pagination
          onPageChange={this.handlePageChange}
-         itemsCount={count}
+         itemsCount="abc"
          pageSize={pageSize}
          currentPage={currentPage}
          />
