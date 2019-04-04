@@ -36,7 +36,7 @@ handlePageChange = page  => {
   this.setState({ currentPage : page});
 };
  handleGenreSelect = genre  => {
-   console.log(genre);
+   this.setState({ selectedGenre: genre});
  };
 
    render() {
@@ -51,6 +51,7 @@ if (count === 0 )
          <div className="col-3">
          <ListGroup 
          items={this.state.genres} 
+         selectedItem={this.state.selectedGenre}
          onItemSelect={this.handleGenreSelect}/>
   
          </div>
