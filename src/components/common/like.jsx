@@ -7,7 +7,7 @@ class Like extends Component {
         if (!this.props.liked) classes += "-o";
         return ( 
         <i onClick={this.props.onClick} 
-        style={{cursor: 'pointer'}}
+        style={{cursor: 'pointer',color:"green"}}
          className={classes} 
          aria-hidden="true"></i> 
         );

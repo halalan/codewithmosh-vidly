@@ -7,10 +7,10 @@ class App extends Component {
     return (
       <div>
     <main className="container">
-   
+    <Movie/>
     </main>
  
-    <Movie/>
+    
     </div>
     );
   }
