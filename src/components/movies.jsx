@@ -51,8 +51,6 @@ if (count === 0 )
          <div className="col-3">
          <ListGroup 
          items={this.state.genres} 
-         textProperty="name"
-         valueProperty="_id"
          onItemSelect={this.handleGenreSelect}/>
   
          </div>
