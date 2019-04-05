@@ -9,8 +9,6 @@ class App extends Component {
     <main className="container">
     <Movie/>
     </main>
- 
-    
     </div>
     );
   }
