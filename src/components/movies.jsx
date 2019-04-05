@@ -15,7 +15,7 @@ import MoviesTable from './moviesTable';
    };
 
    componentDidMount(){
-     const genres = [{ name: 'All Genres'},...getGenres()]
+     const genres = [{ _id:"",name: 'All Genres'},...getGenres()]
 
 
       this.setState({ movies: getMovies(), genres});
@@ -39,7 +39,10 @@ handlePageChange = page  => {
  handleGenreSelect = genre  => {
    this.setState({ selectedGenre: genre, currentPage: 1});
  };
+handleSort = path => {
+  console.log(path);
 
+}
    render() {
 const { length: count } = this.state.movies;
 const {pageSize, currentPage,selectedGenre, movies: allMovies}= this.state;
@@ -66,9 +69,9 @@ if (count === 0 )
 <MoviesTable 
 movies={movies} 
 onLike={this.handleLike} 
-onDelete={this.handleDelete} />
-
-
+onDelete={this.handleDelete} 
+onSort={this.handleSort}
+/>
          <Pagination
          onPageChange={this.handlePageChange}
          itemsCount={filtered.length}
