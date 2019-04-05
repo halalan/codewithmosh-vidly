@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import  { getMovies } from '../services/fakeMovieService'
-import Like from './common/like';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import ListGroup from './common/listGroup';
 import { getGenres } from "../services/fakeGenreService";
+import MoviesTable from './moviesTable';
 
  class Movies extends Component {
    state = {
@@ -57,48 +57,24 @@ if (count === 0 )
          <ListGroup 
          items={this.state.genres} 
          selectedItem={this.state.selectedGenre}
-         onItemSelect={this.handleGenreSelect}/>
-  
+         onItemSelect={this.handleGenreSelect}
+         />
          </div>
          <div className="col">
-         <h3 className="body"> semuanya ada di sini {filtered.length} film bollywood dalam database.</h3>
-     <table className="table">
-     <thead>
-       <tr>
-    <th>Title</th>
-     <th>Movies</th>
-     <th>Stock</th>
-     <th>Rate</th>
-     <th/>
-     <th/>
-     </tr>
-    </thead>
-     <tbody>
-       {movies.map(movie => (
-      <tr  key={movie._id}>
-       <td>{movie.title}</td>
-       <td>{movie.genre.name}</td>
-        <td>{movie.numberInStock}</td>
-     <td>{movie.dailyRentalRate}</td>
-     <td>
-       <Like liked={movie.liked}  onClick={() =>this.handleLike(movie)}/>
-       </td>
-     <td>
-       <button onClick={() => this.handleDelete(movie)} 
-       className="btn btn-danger btn-sm"
-       >
-       klik Remove 
-       </button>
-        </td>
-     </tr>
-       ))}
-  </tbody>
-         </table>
+        <h1> semuanya ada di sini {filtered.length} film bollywood dalam database.</h1>
+       
+<MoviesTable 
+movies={movies} 
+onLike={this.handleLike} 
+onDelete={this.handleDelete} />
+
+
          <Pagination
          onPageChange={this.handlePageChange}
          itemsCount={filtered.length}
          pageSize={pageSize}
          currentPage={currentPage}
+ 
          />
          </div>
          </div>
