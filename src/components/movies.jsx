@@ -42,24 +42,38 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
+getPagedData = () => {
+  const {
+    pageSize,
+    currentPage,
+    sortColumn,
+    movies: allMovies,
+    selectedGenre
+  } = this.state;
+
+
+  const filtered =
+  selectedGenre && selectedGenre._id
+    ? allMovies.filter(m => m.genre._id === selectedGenre._id)
+    : allMovies;
+const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+const movies = paginate(sorted, currentPage, pageSize);
+
+return { totalCount: filtered.length, data: movies };
+};
+
+
   render() {
     const { length: count } = this.state.movies;
     const {
       pageSize,
       currentPage,
-      sortColumn,
-      movies: allMovies,
-      selectedGenre
-    } = this.state;
-
-    if (count === 0)
+      sortColumn} = this.state;
+       if (count === 0)
       return <h1 className="body1">Tidak ada film dalam database!!!!!!!!!!</h1>;
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter(m => m.genre._id === selectedGenre._id)
-        : allMovies;
-    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
-    const movies = paginate(sorted, currentPage, pageSize);
+   
+const {totalCount, data: movies} = this.getPagedData();
+
     return (
       <div className="row">
         <div className="col-3">
@@ -72,7 +86,7 @@ class Movies extends Component {
         <div className="col">
           <p className="body">
             {" "}
-            semuanya ada di sini {filtered.length} film hollywood dalam
+            semuanya ada di sini {totalCount} film hollywood dalam
             database.
           </p>
           <MoviesTable
@@ -84,7 +98,7 @@ class Movies extends Component {
           />
           <Pagination
             onPageChange={this.handlePageChange}
-            itemsCount={filtered.length}
+            itemsCount={totalCount}
             currentPage={currentPage}
             pageSize={pageSize}
           />
